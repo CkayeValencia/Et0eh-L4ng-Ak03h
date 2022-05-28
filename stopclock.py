@@ -89,3 +89,52 @@ progress.place(x=-10,y=235)
 
 def exit():
     loading.destroy()
+
+frame_bg='#249794'
+
+
+Frame(loading,width=427,
+            height=241,
+            bg=frame_bg,).place(x=0,y=0)  #249794
+frame_b1=Button(loading,width=10,
+                height=1,
+                text='Get Started',
+                command=run,
+                border=3,fg=frame_bg,
+                bg='white')
+frame_b1.place(x=70,y=180)
+
+frame_b2=Button(loading,width=10,
+                height=1,
+                text='Exit',
+                command=exit,
+                border=3,
+                fg=frame_bg,
+                bg='white')
+frame_b2.place(x=270,y=180)
+
+
+######## Label
+
+frame_l1=Label(loading,text='4k03h L4n6 703H',
+                fg='white',
+                bg=frame_bg)
+font_l1=('Calibri (Body)',18,'bold')
+frame_l1.config(font=font_l1)
+frame_l1.place(x=50,y=80)
+
+'''
+l2=Label(loading,text='SCREEN',fg='white',bg=a)
+lst2=('Calibri (Body)',18)
+l2.config(font=lst2)
+l2.place(x=155,y=82)
+'''
+
+frame_l2=Label(loading,text='STOPWATCH',fg='white',bg=frame_bg)
+font_l2=('Calibri (Body)',13)
+frame_l2.config(font=font_l2)
+frame_l2.place(x=50,y=110)
+
+  
+
+loading.mainloop()    
