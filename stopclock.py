@@ -4,6 +4,14 @@ from tkinter import *
 
 loading=Tk()
 
+ms = 0
+second = 0
+minute = 0
+hour = 0
+stop = 0 
+starts = 0
+music = 0
+lap = 0
 
 window_width = 427
 window_height = 250
@@ -61,6 +69,79 @@ def stopwatch_GUI():
                 font=("Arial", 14), 
                 fill="white")
     
+
+    stopwatch.mainloop()
+
+    # merv
+
+    pygame.mixer.init()
+    def start():
+        global ms, second, minute, starts, stop, hour, textt
+        ms += 1
+        if ms == 100:
+            ms = 0
+            second += 1
+        elif second == 60:
+            second = 0 
+            minute += 1
+        elif minute == 60:
+            minute = 0
+            hour += 1
+        if stop == 0:
+                    xms = f"0{ms}" if ms < 10 else f"{ms}"
+                    xsecond = f"0{second}" if second < 10 else f"{second}"
+                    xminute = f"0{minute}" if minute < 10 else f"{minute}"
+                    xhour = f"0{hour}" if hour < 10 else f"{hour}"
+                    textt = f"{xhour}:{xminute}:{xsecond}:{xms}"
+                    TkText = Label(stopwatch, text= textt, font = ("Times 20"), fg = "white", bg = "black")
+                    TkText.after(10, start)
+                    TkText.place(x=183, y=223)
+    def stop_watch():
+        global stop
+        stop = 1
+        start_button['state'] = NORMAL
+        pygame.mixer.music.pause()
+
+    def reset_watch():
+        global ms, second, minute, stop, music, lap
+        ms, second, minute, stop, start, music = 0, 0, 0, 1, 0, 0
+        TkText = Label(stopwatch, text= "00:00:00:00", font = ("Times 20"), fg = "white", bg = "black")
+        TkText.place(x=183, y=223)
+        start_button['state'] = NORMAL
+        pygame.mixer.music.stop()
+        my_listbox.delete(0, END)
+        lap = 0
+    
+    def continue_watch():
+        global stop, music
+        music += 1
+        if music == 1:
+            pygame.mixer.music.load("C:\\Users\\Win7\\Desktop\\testset\\SxF.mp3")
+            pygame.mixer.music.play(loops = -1)
+        elif music > 1:
+            pygame.mixer.music.unpause()
+        stop = 0
+        start()
+        start_button['state'] = DISABLED
+    #lap
+    my_frame = Frame(stopwatch)
+    my_scrollbar = Scrollbar(my_frame, orient=VERTICAL, background = "red")
+    #listbox
+
+    my_listbox = Listbox(my_frame, width= 15, height= 5, yscrollcommand = my_scrollbar.set, background = "green", font = ("Times 15"))
+    my_scrollbar.config(command= my_listbox.yview)
+    my_scrollbar.pack(side = RIGHT, fill = Y)
+    my_frame.place(x=160, y = 365)
+    my_listbox.place(x=160, y = 365)
+    my_listbox.pack()
+
+    def insering():
+        global lap
+        lap += 1
+        my_listbox.insert(ANCHOR, f"{lap}.  {textt}")
+
+
+    stopwatch.resizable(0, 0)
 
     stopwatch.mainloop()
 
