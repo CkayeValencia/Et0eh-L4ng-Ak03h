@@ -38,114 +38,106 @@ progress=Progressbar(loading,style="red.Horizontal.TProgressbar",
 
 
 def stopwatch_GUI():
-    global location
-    stopwatch = Tk()
-    stopwatch.title('Stopwatch')
-    stopwatch.geometry('500x500')
-    
-
-    icon = PhotoImage(file=f'{location}\\icon.png')
-    stopwatch.iconphoto(False, icon)
-    stopwatch.config(background="#a0dfe6")
-    
-
-    photo = PhotoImage(file=f'{location}\\background.png')
-
-    pic = Canvas(stopwatch,
-            width=500, 
-            height=500,
-            bg='black', 
-            relief=RAISED, 
-            bd=10,)
-
-    
-    pic.pack(padx=0,pady=0, 
-        expand=True)  
-    pic.create_image(0,0, 
-        image = photo, 
-        anchor = "nw",)
-    pic.create_text(150,30, 
-                text="4k03h L4n6 703H's Stopwatch", 
-                font=("Arial", 14), 
-                fill="white")
-    
-
-    stopwatch.mainloop()
-
-    # merv
-
-    pygame.mixer.init()
-    def start():
-        global ms, second, minute, starts, stop, hour, textt
-        ms += 1
-        if ms == 100:
-            ms = 0
-            second += 1
-        elif second == 60:
-            second = 0 
-            minute += 1
-        elif minute == 60:
-            minute = 0
-            hour += 1
-        if stop == 0:
-                    xms = f"0{ms}" if ms < 10 else f"{ms}"
-                    xsecond = f"0{second}" if second < 10 else f"{second}"
-                    xminute = f"0{minute}" if minute < 10 else f"{minute}"
-                    xhour = f"0{hour}" if hour < 10 else f"{hour}"
-                    textt = f"{xhour}:{xminute}:{xsecond}:{xms}"
-                    TkText = Label(stopwatch, text= textt, font = ("Times 20"), fg = "white", bg = "black")
-                    TkText.after(10, start)
-                    TkText.place(x=183, y=223)
+    global ms, second, minute, starts, stop, hour, timeer
+        if(stop==0):
+            timeer = str(timee.get())
+            hour,minute,second,ms = map(int,timeer.split(":")) 
+            hour = int(hour)
+            minute = int(minute)
+            second=int(second)
+            ms= int(ms)
+            if(ms<99):
+                ms+=1
+            elif(ms==99):
+                ms=0
+                if(second<59):
+                    second+=1
+                elif(second==59):
+                    second=0
+                    if(minute<59):
+                        minute+=1
+                    elif(minute==59):
+                        hour+=1
+            if(hour<10):
+                hour = str(0)+str(hour)
+            else:
+                hour= str(hour)
+            if(minute<10):
+                minute = str(0)+str(minute)
+            else:
+                minute= str(minute)
+            if(second<10):
+                second = str(0)+str(second)
+            else:
+                second = str(second)
+            if(ms<10):
+                ms=str(0)+str(ms)
+            else:
+                ms=str(ms)
+            timeer=hour+":"+minute+":"+second+":"+ms
+            timee.set(timeer)
+            if(stop==0):
+                time.sleep(0.00095)
+                stopwatch.after(9, start)
+                    
     def stop_watch():
         global stop
         stop = 1
         start_button = Button(stopwatch, image = start_bttn, command=continue_watch, borderwidth=5)
-        start_button.place(x =160, y = 293)
+        start_button.place(x =157, y = 293)
         reset_button = Button(stopwatch, image = reset_bttn, command=reset_watch, borderwidth=5)
         reset_button.place(x=300, y = 293)
         pygame.mixer.music.pause()
-
+        exxiit_button['state'] = NORMAL
+ 
     def reset_watch():
         global ms, second, minute, stop, music, lap
         ms, second, minute, stop, start, music = 0, 0, 0, 1, 0, 0
-        TkText = Label(stopwatch, text= "00:00:00:00", font = ("Times 20"), fg = "white", bg = "black")
-        TkText.place(x=183, y=223)
+        timee.set('00:00:00:00')
         start_button['state'] = NORMAL
         pygame.mixer.music.stop()
-        my_listbox.delete(0, END)
+        LapBox.delete(0, END)
         lap = 0
-    
+        lap_button['state'] = DISABLED
+        exxiit_button['state'] = NORMAL
+
     def continue_watch():
         global stop, music
         music += 1
         if music == 1:
-            pygame.mixer.music.load("C:\\Users\\Win7\\Desktop\\testset\\SxF.mp3")
+            pygame.mixer.music.load(f"{location}\\SxF.mp3")
             pygame.mixer.music.play(loops = -1)
         elif music > 1:
             pygame.mixer.music.unpause()
         stop = 0
         start()
         stop_button = Button(stopwatch, image = stop_bttn, command= stop_watch, borderwidth=5)
-        stop_button.place(x=160, y = 293)
+        stop_button.place(x=157, y = 293)
         lap_button = Button(stopwatch, image = lap_bttn, command=insering, borderwidth=5)
         lap_button.place(x=300, y = 293)
-        
-    #lap
-    my_frame = Frame(stopwatch)
-    my_scrollbar = Scrollbar(my_frame, orient=VERTICAL, background = "red")
-    #listbox
+        exxiit_button['state'] = DISABLED
+    def leave():
+        stopwatch.destroy()
 
-    my_listbox = Listbox(my_frame, width= 15, height= 5, yscrollcommand = my_scrollbar.set, background = "green", font = ("Times 15"))
-    my_scrollbar.config(command= my_listbox.yview)
-    my_scrollbar.pack(side = RIGHT, fill = Y)
-    my_frame.place(x=160, y = 365)
-    my_listbox.place(x=160, y = 365)
-    my_listbox.pack()
+    timee = StringVar()
+    timee.set("00:00:00:00")
+    lb = Label(stopwatch,textvariable=timee,font = ("Times 40"), fg = "white", bg = "black")
+    lb.place(x=118, y=197)
+# lap
+    LapFrame = Frame(stopwatch, bd=0, background = "green")
+    Lapscrollbar = Scrollbar(LapFrame, orient=VERTICAL, troughcolor = "red", bg = 'black', width= 0)
+# listbox
+    LapBox = Listbox(LapFrame, width= 18, height= 4, yscrollcommand = Lapscrollbar.set, background = "#B43757", font = ("Times 18"), bd = 0, fg = "#D9DDDC")
+    Lapscrollbar.config(command= LapBox.yview, troughcolor = "red", bg = 'black')
+    Lapscrollbar.pack(side = RIGHT, fill = Y)
+    LapFrame.place(x=142, y = 365)
+    LapBox.place(x=142, y = 365)
+    LapBox.pack()
 
     def insering():
-        global lap
+        global lap, timeer
         lap += 1
-        my_listbox.insert(ANCHOR, f"{lap}.  {textt}")
+        LapBox.insert(0, f"  {lap}.  {timeer}")
 
 # start image
     start_pic = Image.open("C:\\Users\\Kenneth Jones\\Desktop\\EEE\\Project\\Start.png")
