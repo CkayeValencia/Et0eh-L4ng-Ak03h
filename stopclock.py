@@ -42,7 +42,6 @@ progress=Progressbar(loading,style="red.Horizontal.TProgressbar",
 
 
 def stopwatch_GUI():
-<<<<<<< HEAD
     global ms, second, minute, starts, stop, hour, timeer
     if(stop==0):
         timeer = str(timee.get())
@@ -81,38 +80,6 @@ def stopwatch_GUI():
             ms=str(ms)
         timeer=hour+":"+minute+":"+second+":"+ms
         timee.set(timeer)
-=======
-  stopwatch = Tk()
-  stopwatch.title('Stopwatch')
-  stopwatch.geometry('500x500')
-    
-
-  icon = PhotoImage(file='C:\\Users\\Hello\Pictures\\aa.png')
-  stopwatch.iconphoto(False, icon)
-  stopwatch.config(background="#a0dfe6")
-
-
-  photo = PhotoImage(file="C:\\Users\\Hello\Pictures\\aa.png")
-
-  pic = Canvas(stopwatch,
-          width=300, 
-          height=205,
-          bg='black', 
-          relief=RAISED, 
-          bd=10,)
-
-
-  pic.pack(padx=0,pady=0, 
-      expand=True)  
-  pic.create_image(0,0, 
-      image = photo, 
-      anchor = "nw",)
-  pic.create_text(150,30, 
-              text="4k03h L4n6 703H's Stopwatch", 
-              font=("Arial", 14), 
-              fill="white")
-      global ms, second, minute, starts, stop, hour, timeer
->>>>>>> 90a09c20bd7695dc8493140dd7036942fe390269
         if(stop==0):
             time.sleep(0.00095)
             stopwatch.after(9, start)
