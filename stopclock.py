@@ -171,14 +171,12 @@ def stopwatch_GUI():
 # start Button
     start_button = Button(stopwatch, image = start_bttn, command=continue_watch, borderwidth=5)
     start_button.place(x =160, y = 293)
-
-# Lap Button
-    lap_button = Button(stopwatch, image = lap_bttn, command=insering, borderwidth=5)
-    lap_button.place(x=300, y = 293)
-
 # reset Button
     reset_button = Button(stopwatch, image = reset_bttn, command=reset_watch, borderwidth=5)
     reset_button.place(x=300, y = 293)
+# Lap Button
+    lap_button = Button(stopwatch, image = lap_bttn, command=insering, borderwidth=5)
+    lap_button.place(x=300, y = 293)
     
     stopwatch.resizable(0, 0)
 
