@@ -140,35 +140,36 @@ def stopwatch_GUI():
         LapBox.insert(0, f"  {lap}.  {timeer}")
 
 # start image
-    start_pic = Image.open("C:\\Users\\Kenneth Jones\\Desktop\\EEE\\Project\\Start.png")
+    start_pic = Image.open(f"{location}\\Start.png")
     resized = start_pic.resize((33, 33), Image.ANTIALIAS)
     start_bttn = ImageTk.PhotoImage(resized)
-
 # stop image
-    stop_pic = Image.open("C:\\Users\\Kenneth Jones\\Desktop\\EEE\\Project\\Stop1.png")
+    stop_pic = Image.open(f"{location}\\Stop1.png")
     resized = stop_pic.resize((33, 33), Image.ANTIALIAS)
     stop_bttn = ImageTk.PhotoImage(resized)
 # reset image
-    reset_pic = Image.open("C:\\Users\\Kenneth Jones\\Desktop\\EEE\\Project\\Reset.png")
+    reset_pic = Image.open(f"{location}\\Reset.png")
     resized = reset_pic.resize((33, 33), Image.ANTIALIAS)
     reset_bttn = ImageTk.PhotoImage(resized)
 # lap image
-    lap_pic = Image.open("C:\\Users\\Kenneth Jones\\Desktop\\EEE\\Project\\Lap.png")
+    lap_pic = Image.open(f"{location}\\Lap.png")
     resized = lap_pic.resize((33, 33), Image.ANTIALIAS)
     lap_bttn = ImageTk.PhotoImage(resized)
-
 # stop Button
     stop_button = Button(stopwatch, image = stop_bttn, command= stop_watch, borderwidth=5)
-    stop_button.place(x=160, y = 293)
+    stop_button.place(x=157, y = 293)
 # start Button
     start_button = Button(stopwatch, image = start_bttn, command=continue_watch, borderwidth=5)
-    start_button.place(x =160, y = 293)
-# reset Button
-    reset_button = Button(stopwatch, image = reset_bttn, command=reset_watch, borderwidth=5)
-    reset_button.place(x=300, y = 293)
+    start_button.place(x =157, y = 293)
 # Lap Button
     lap_button = Button(stopwatch, image = lap_bttn, command=insering, borderwidth=5)
     lap_button.place(x=300, y = 293)
+# Reset Button
+    reset_button = Button(stopwatch, image = reset_bttn, command=reset_watch, borderwidth=5)
+    reset_button.place(x=300, y = 293)
+# Exit Button
+    exxiit_button = Button(stopwatch, text= "Exit", command=leave, borderwidth=5, bg= "red", fg = "white")
+    exxiit_button.place(x=450, y = 460)
     
     stopwatch.resizable(0, 0)
 
