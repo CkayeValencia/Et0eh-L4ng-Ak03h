@@ -7,7 +7,7 @@ import os
 import pygame
 
 loading=Tk()
-
+location = os.getcwd()
 ms = 0
 second = 0
 minute = 0
@@ -27,7 +27,7 @@ loading.geometry("%dx%d+%d+%d" %(window_width,window_height,line_x,line_y))
 
 
 loading.overrideredirect(1)
-
+loading.configure(cursor="heart"
 
 theme = ttk.Style()
 theme.theme_use('clam')
