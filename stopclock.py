@@ -45,7 +45,15 @@ def stopwatch_GUI():
     stopwatch = Tk()
     stopwatch.title('Stopwatch')
     stopwatch.geometry('500x500')
-
+    # code to pop the gui to the center of the screen
+    xxxwidth_of_window = 500
+    xxxheight_of_window = 500
+    xxxscreen_width = stopwatch.winfo_screenwidth()
+    xxxscreen_height = stopwatch.winfo_screenheight()
+    xxxx_coordinate = (xxxscreen_width/2)-(xxxwidth_of_window/2)
+    yyyy_coordinate = (xxxscreen_height/2)-(xxxheight_of_window/2)
+    stopwatch.geometry("%dx%d+%d+%d" %(xxxwidth_of_window,xxxheight_of_window,xxxx_coordinate,yyyy_coordinate))
+    
     icon = PhotoImage(file=f"{location}\\icon.png")
     stopwatch.iconphoto(False, icon)
     stopwatch.config(background="#a0dfe6", cursor="heart")
@@ -151,8 +159,41 @@ def stopwatch_GUI():
         lap_button = Button(stopwatch, image = lap_bttn, command=insering, borderwidth=5)
         lap_button.place(x=300, y = 293)
         exxiit_button['state'] = DISABLED
-    def leave():
-        stopwatch.destroy()
+    
+    #confirmation exit
+    def confirming():
+        def ifyes():
+            ConfirmEXT.destroy()
+            stopwatch.destroy()
+        def ifno():
+            exxiit_button['state'] = NORMAL
+            ConfirmEXT.grab_release()
+            ConfirmEXT.destroy()
+        
+        exxiit_button['state'] = DISABLED
+        ConfirmEXT = Toplevel()
+        ConfirmEXT.title('Confirmation')
+        ConfirmEXT.geometry('170x50')
+        ConfirmEXT.grab_set()
+        xxwidth_of_window = 170
+        xxheight_of_window = 50
+        xxscreen_width = ConfirmEXT.winfo_screenwidth()
+        xxscreen_height = ConfirmEXT.winfo_screenheight()
+        xxx_coordinate = (xxscreen_width/2)-(xxwidth_of_window/2)
+        yyy_coordinate = (xxscreen_height/2)-(xxheight_of_window/2)
+        ConfirmEXT.geometry("%dx%d+%d+%d" %(xxwidth_of_window,xxheight_of_window,xxx_coordinate,yyy_coordinate))
+        ConfirmEXT.overrideredirect(1)
+        
+
+        secondframeconfirmationlabel = tk.Label(ConfirmEXT, text = "Are you really going to leave? :(")
+        secondframeconfirmationlabel.place(x = 0, y = 0)
+        Yespls = tk.Button(ConfirmEXT, text = "Yes", command = ifyes, bg= "orange")
+        Yespls.place(x = 53, y = 20)
+
+        plsNo = tk.Button(ConfirmEXT, text = "No", command = ifno, bg= "orange")
+        plsNo.place(x = 83, y = 20)
+        ConfirmEXT.resizable(0, 0)
+        ConfirmEXT.mainloop()
 
     timee = StringVar()
     timee.set("00:00:00:00")
@@ -203,7 +244,7 @@ def stopwatch_GUI():
     reset_button = Button(stopwatch, image = reset_bttn, command=reset_watch, borderwidth=5)
     reset_button.place(x=300, y = 293)
 # Exit Button
-    exxiit_button = Button(stopwatch, text= "Exit", command=leave, borderwidth=5, bg= "red", fg = "white")
+    exxiit_button = Button(stopwatch, text= "Exit", command=confirming, borderwidth=5, bg= "red", fg = "white")
     exxiit_button.place(x=450, y = 460)
     
     stopwatch.resizable(0, 0)
@@ -231,6 +272,42 @@ def run():
     stopwatch_GUI()
         
 progress.place(x=-10,y=235)
+
+# exit confirmation 1st interface
+def confirming1():
+        b2['state'] = DISABLED
+        def yesif():
+            EXTconfirm.destroy()
+            loading.destroy()
+        def noif():
+            b2['state'] = NORMAL
+            EXTconfirm.destroy()
+            EXTconfirm.grab_release()
+            
+        
+
+        EXTconfirm = Toplevel()
+        EXTconfirm.title('Confirmation')
+        EXTconfirm.geometry('170x50')
+        EXTconfirm.grab_set()
+        xwidth_of_window = 170
+        xheight_of_window = 50
+        xscreen_width = EXTconfirm.winfo_screenwidth()
+        xscreen_height = EXTconfirm.winfo_screenheight()
+        xx_coordinate = (xscreen_width/2)-(xwidth_of_window/2)
+        yy_coordinate = (xscreen_height/2)-(xheight_of_window/2)
+        EXTconfirm.geometry("%dx%d+%d+%d" %(xwidth_of_window,xheight_of_window,xx_coordinate,yy_coordinate))
+        EXTconfirm.overrideredirect(1)
+        ConfirmingTXT = tk.Label(EXTconfirm, text = "Are you really going to leave? :(")
+        ConfirmingTXT.place(x = 0, y = 0)
+
+        Yespls = tk.Button(EXTconfirm, text = "Yes", command = yesif, bg= "orange")
+        Yespls.place(x = 53, y = 20)
+
+        plsNo = tk.Button(EXTconfirm, text = "No", command = noif, bg= "orange")
+        plsNo.place(x = 83, y = 20)
+        EXTconfirm.resizable(0, 0)
+        EXTconfirm.mainloop()
 
 def exit():
     loading.destroy()
