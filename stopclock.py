@@ -42,35 +42,35 @@ progress=Progressbar(loading,style="red.Horizontal.TProgressbar",
 
 
 def stopwatch_GUI():
-  stopwatch = Tk()
-  stopwatch.title('Stopwatch')
-  stopwatch.geometry('500x500')
-    
+    global location, ms, second, minute, hour, stop, starts, music
+    stopwatch = Tk()
+    stopwatch.title('Stopwatch')
+    stopwatch.geometry('500x500')
 
-  icon = PhotoImage(file='C:\\Users\\Hello\Pictures\\aa.png')
-  stopwatch.iconphoto(False, icon)
-  stopwatch.config(background="#a0dfe6")
+    icon = PhotoImage(file=f"{location}\\icon.png")
+    stopwatch.iconphoto(False, icon)
+    stopwatch.config(background="#a0dfe6", cursor="heart")
 
+    photo = PhotoImage(file=f"{location}\\background.png")
 
-  photo = PhotoImage(file="C:\\Users\\Hello\Pictures\\aa.png")
+    pic = Canvas(stopwatch,
+            width=500, 
+            height=500,
+            bg='black', 
+            relief=RAISED, 
+            bd=10,)
 
-  pic = Canvas(stopwatch,
-          width=300, 
-          height=205,
-          bg='black', 
-          relief=RAISED, 
-          bd=10,)
+    pic.pack(padx=0,pady=0, 
+        expand=True)  
 
+    pic.create_image(0,0, 
+        image = photo, 
+        anchor = "nw",)
 
-  pic.pack(padx=0,pady=0, 
-      expand=True)  
-  pic.create_image(0,0, 
-      image = photo, 
-      anchor = "nw",)
-  pic.create_text(150,30, 
-              text="4k03h L4n6 703H's Stopwatch", 
-              font=("Arial", 14), 
-              fill="white")
+    pic.create_text(250,275, 
+                text="4k03h L4n6 703H's Stopwatch", 
+                font=("Arial", 8), 
+                fill="aquamarine")
 
     global ms, second, minute, starts, stop, hour, timeer
     if(stop==0):
@@ -230,7 +230,6 @@ def run():
     loading.destroy()
     stopwatch_GUI()
         
-    
 progress.place(x=-10,y=235)
 
 def exit():
