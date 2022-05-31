@@ -71,48 +71,49 @@ def stopwatch_GUI():
                 font=("Arial", 8), 
                 fill="aquamarine")
 
-    global ms, second, minute, starts, stop, hour, timeer
-    if(stop==0):
-        timeer = str(timee.get())
-        hour,minute,second,ms = map(int,timeer.split(":")) 
-        hour = int(hour)
-        minute = int(minute)
-        second=int(second)
-        ms= int(ms)
-        if(ms<99):
-            ms+=1
-        elif(ms==99):
-            ms=0
-            if(second<59):
-                second+=1
-            elif(second==59):
-                second=0
-                if(minute<59):
-                    minute+=1
-                elif(minute==59):
-                    hour+=1
-        if(hour<10):
-            hour = str(0)+str(hour)
-        else:
-            hour= str(hour)
-        if(minute<10):
-            minute = str(0)+str(minute)
-        else:
-            minute= str(minute)
-        if(second<10):
-            second = str(0)+str(second)
-        else:
-            second = str(second)
-        if(ms<10):
-            ms=str(0)+str(ms)
-        else:
-            ms=str(ms)
-        timeer=hour+":"+minute+":"+second+":"+ms
-        timee.set(timeer)
-
+    pygame.mixer.init()
+    def start():
+        global ms, second, minute, starts, stop, hour, timeer, buttoninsert
         if(stop==0):
-            time.sleep(0.00095)
-            stopwatch.after(9, start)
+            timeer = str(timee.get())
+            hour,minute,second,ms = map(int,timeer.split(":")) 
+            hour = int(hour)
+            minute = int(minute)
+            second=int(second)
+            ms= int(ms)
+            if(ms<99):
+                ms+=1
+            elif(ms==99):
+                ms=0
+                if(second<59):
+                    second+=1
+                elif(second==59):
+                    second=0
+                    if(minute<59):
+                        minute+=1
+                    elif(minute==59):
+                        hour+=1
+            if(hour<10):
+                hour = str(0)+str(hour)
+            else:
+                hour= str(hour)
+            if(minute<10):
+                minute = str(0)+str(minute)
+            else:
+                minute= str(minute)
+            if(second<10):
+                second = str(0)+str(second)
+            else:
+                second = str(second)
+            if(ms<10):
+                ms=str(0)+str(ms)
+            else:
+                ms=str(ms)
+            timeer=hour+":"+minute+":"+second+":"+ms
+            timee.set(timeer)
+            if(stop==0):
+                time.sleep(0.00095)
+                stopwatch.after(9, start)
                     
     def stop_watch():
         global stop
