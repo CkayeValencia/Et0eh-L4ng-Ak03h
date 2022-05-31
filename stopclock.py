@@ -7,7 +7,7 @@ import os
 import pygame
 
 loading=Tk()
-
+location = os.getcwd()
 ms = 0
 second = 0
 minute = 0
@@ -27,7 +27,7 @@ loading.geometry("%dx%d+%d+%d" %(window_width,window_height,line_x,line_y))
 
 
 loading.overrideredirect(1)
-
+loading.configure(cursor="heart")
 
 theme = ttk.Style()
 theme.theme_use('clam')
@@ -40,9 +40,40 @@ progress=Progressbar(loading,style="red.Horizontal.TProgressbar",
                     length=500,
                     mode='determinate',)
 
-
 def stopwatch_GUI():
-    global ms, second, minute, starts, stop, hour, timeer
+    global location, ms, second, minute, hour, stop, starts, music
+    stopwatch = Tk()
+    stopwatch.title('Stopwatch')
+    stopwatch.geometry('500x500')
+
+    icon = PhotoImage(file=f"{location}\\icon.png")
+    stopwatch.iconphoto(False, icon)
+    stopwatch.config(background="#a0dfe6", cursor="heart")
+
+    photo = PhotoImage(file=f"{location}\\background.png")
+
+    pic = Canvas(stopwatch,
+            width=500, 
+            height=500,
+            bg='black', 
+            relief=RAISED, 
+            bd=10,)
+
+    pic.pack(padx=0,pady=0, 
+        expand=True)  
+
+    pic.create_image(0,0, 
+        image = photo, 
+        anchor = "nw",)
+
+    pic.create_text(250,275, 
+                text="4k03h L4n6 703H's Stopwatch", 
+                font=("Arial", 8), 
+                fill="aquamarine")
+
+    pygame.mixer.init()
+    def start():
+        global ms, second, minute, starts, stop, hour, timeer, buttoninsert
         if(stop==0):
             timeer = str(timee.get())
             hour,minute,second,ms = map(int,timeer.split(":")) 
@@ -199,14 +230,12 @@ def run():
     loading.destroy()
     stopwatch_GUI()
         
-    
 progress.place(x=-10,y=235)
 
 def exit():
     loading.destroy()
 
 frame_bg='#249794'
-
 
 Frame(loading,width=427,
             height=241,
@@ -238,18 +267,9 @@ font_l1=('Calibri (Body)',18,'bold')
 frame_l1.config(font=font_l1)
 frame_l1.place(x=50,y=80)
 
-'''
-l2=Label(loading,text='SCREEN',fg='white',bg=a)
-lst2=('Calibri (Body)',18)
-l2.config(font=lst2)
-l2.place(x=155,y=82)
-'''
-
 frame_l2=Label(loading,text='STOPWATCH',fg='white',bg=frame_bg)
 font_l2=('Calibri (Body)',13)
 frame_l2.config(font=font_l2)
 frame_l2.place(x=50,y=110)
-
-  
 
 loading.mainloop()    
