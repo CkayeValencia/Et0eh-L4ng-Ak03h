@@ -1,6 +1,7 @@
 from tkinter import ttk
 from tkinter.ttk import Progressbar
 from tkinter import *
+import tkinter as tk
 from PIL import ImageTk, Image
 import time
 import os
@@ -275,12 +276,13 @@ progress.place(x=-10,y=235)
 
 # exit confirmation 1st interface
 def confirming1():
-        b2['state'] = DISABLED
+        global frame_b2
+        frame_b2['state'] = DISABLED
         def yesif():
             EXTconfirm.destroy()
             loading.destroy()
         def noif():
-            b2['state'] = NORMAL
+            frame_b2['state'] = NORMAL
             EXTconfirm.destroy()
             EXTconfirm.grab_release()
             
@@ -325,14 +327,14 @@ frame_b1=Button(loading,width=10,
                 bg='white')
 frame_b1.place(x=70,y=180)
 
-frame_b2=Button(loading,width=10,
+frame_frame_b2=Button(loading,width=10,
                 height=1,
                 text='Exit',
-                command=exit,
+                command=confirming1,
                 border=3,
                 fg=frame_bg,
                 bg='white')
-frame_b2.place(x=270,y=180)
+frame_frame_b2.place(x=270,y=180)
 
 
 ######## Label
