@@ -237,7 +237,6 @@ def exit():
 
 frame_bg='#249794'
 
-
 Frame(loading,width=427,
             height=241,
             bg=frame_bg,).place(x=0,y=0)  #249794
@@ -268,18 +267,9 @@ font_l1=('Calibri (Body)',18,'bold')
 frame_l1.config(font=font_l1)
 frame_l1.place(x=50,y=80)
 
-'''
-l2=Label(loading,text='SCREEN',fg='white',bg=a)
-lst2=('Calibri (Body)',18)
-l2.config(font=lst2)
-l2.place(x=155,y=82)
-'''
-
 frame_l2=Label(loading,text='STOPWATCH',fg='white',bg=frame_bg)
 font_l2=('Calibri (Body)',13)
 frame_l2.config(font=font_l2)
 frame_l2.place(x=50,y=110)
-
-  
 
 loading.mainloop()    
