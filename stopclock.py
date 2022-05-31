@@ -40,7 +40,6 @@ progress=Progressbar(loading,style="red.Horizontal.TProgressbar",
                     length=500,
                     mode='determinate',)
 
-
 def stopwatch_GUI():
     global location, ms, second, minute, hour, stop, starts, music
     stopwatch = Tk()
