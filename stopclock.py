@@ -121,8 +121,8 @@ def stopwatch_GUI():
             timeer=hour+":"+minute+":"+second+":"+ms
             timee.set(timeer)
             if(stop==0):
-                time.sleep(0.00095)
-                stopwatch.after(9, start)
+                time.sleep(0.00700000000000001)
+                stopwatch.after(2, start)
                     
     def stop_watch():
         global stop
