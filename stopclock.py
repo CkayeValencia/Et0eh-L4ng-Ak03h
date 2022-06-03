@@ -327,14 +327,14 @@ frame_b1=Button(loading,width=10,
                 bg='white')
 frame_b1.place(x=70,y=180)
 
-frame_frame_b2=Button(loading,width=10,
+frame_b2=Button(loading,width=10,
                 height=1,
                 text='Exit',
                 command=confirming1,
                 border=3,
                 fg=frame_bg,
                 bg='white')
-frame_frame_b2.place(x=270,y=180)
+frame_b2.place(x=270,y=180)
 
 
 ######## Label
